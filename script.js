@@ -1,12 +1,12 @@
 const tabela = document.getElementById('tabelaNotas');
 const calcularNota = document.getElementById('calcularNota');
 
-// Função para carregar notas do backend
+// função para carregar notas do backend
 async function carregarNotas() {
   const response = await fetch('http://localhost:3000/notas');
   const notas = await response.json();
 
-  // Preenche a tabela com as notas
+  // preenche a tabela com as notas
   tabela.innerHTML = '';
   notas.forEach(nota => {
     const novaLinha = tabela.insertRow();
@@ -39,22 +39,22 @@ calcularNota.addEventListener('click', async () => {
     ((provaObjetiva1 + provaObjetiva2 + provaObjetiva3) / 3) * 0.3;
 
   try {
-    // Envia nota para o backend
+    // envia nota para o backend
     await fetch('http://localhost:3000/notas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ materia, notaFinal }),
     });
 
-    // Atualiza tabela
+    // atualiza tabela
     await carregarNotas();
   } catch (err) {
     alert('Erro ao salvar nota no servidor.');
   }
 
-  // Limpa o formulário
+  // limpa o formulário
   document.getElementById('gradeForm').reset();
 });
 
-// Carrega notas ao iniciar
+// carrega notas ao iniciar
 carregarNotas();

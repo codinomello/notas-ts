@@ -3,21 +3,21 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// Configuração do servidor
+// configuração do servidor
 const app = express();
 const PORT = 3000;
 
-// Middlewares
+// middlewares
 app.use(cors());
 app.use(bodyParser.json());
 
-// Conexão com MongoDB
+// conexão com MongoDB
 mongoose
   .connect('mongodb://localhost:27017/notas', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado ao MongoDB!'))
   .catch(err => console.error('Erro ao conectar ao MongoDB:', err));
 
-// Modelo de Notas
+// modelo de notas
 const NotaSchema = new mongoose.Schema({
   materia: { type: String, required: true, unique: true },
   notaFinal: { type: Number, required: true },
@@ -25,7 +25,7 @@ const NotaSchema = new mongoose.Schema({
 
 const Nota = mongoose.model('Nota', NotaSchema);
 
-// Rotas
+// rotas
 app.get('/notas', async (req, res) => {
   try {
     const notas = await Nota.find();
@@ -42,10 +42,10 @@ app.post('/notas', async (req, res) => {
     let nota = await Nota.findOne({ materia });
 
     if (nota) {
-      // Atualiza nota existente
+      // atualiza nota existente
       nota.notaFinal = notaFinal;
     } else {
-      // Cria nova nota
+      // cria nova nota
       nota = new Nota({ materia, notaFinal });
     }
 
@@ -56,7 +56,7 @@ app.post('/notas', async (req, res) => {
   }
 });
 
-// Inicia o servidor
+// inicia o servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

@@ -8,42 +8,42 @@
 </head>
 <body class="bg-gray-100 font-sans">
   <div class="container mx-auto px-4 py-10">
-    <!-- Formulário -->
+    <!-- formulário -->
     <div class="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto">
       <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Planilhas de Notas</h1>
       <form id="gradeForm" class="space-y-4">
         <div>
-          <label for="materia" class="block text-gray-700 font-medium mb-2">Matéria</label>
-          <input type="text" id="materia" placeholder="Ex: Matemática" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+          <label for="matéria" class="block text-gray-700 font-medium mb-2">Matéria</label>
+          <input type="text" id="matéria" placeholder="Ex: Matemática" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
         </div>
         <div>
-          <label for="notaProfessor" class="block text-gray-700 font-medium mb-2">Nota do Professor (20%)</label>
-          <input type="number" id="notaProfessor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
+          <label for="NP" class="block text-gray-700 font-medium mb-2">Nota do Professor (20%)</label>
+          <input type="number" id="NP" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
         </div>
         <div>
-          <label for="provaDissertativa" class="block text-gray-700 font-medium mb-2">Prova Dissertativa (25%)</label>
-          <input type="number" id="provaDissertativa" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
+          <label for="PD" class="block text-gray-700 font-medium mb-2">Prova Dissertativa (25%)</label>
+          <input type="number" id="PD" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
         </div>
         <div>
-          <label for="simulado" class="block text-gray-700 font-medium mb-2">Simulado (25%)</label>
-          <input type="number" id="simulado" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
+          <label for="SI" class="block text-gray-700 font-medium mb-2">Simulado (25%)</label>
+          <input type="number" id="SI" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
         </div>
         <div>
-          <label for="provaObjetiva1" class="block text-gray-700 font-medium mb-2">Prova Objetiva 1</label>
-          <input type="number" id="provaObjetiva1" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
+          <label for="PO1" class="block text-gray-700 font-medium mb-2">Prova Objetiva 1</label>
+          <input type="number" id="PO1" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
         </div>
         <div>
-          <label for="provaObjetiva2" class="block text-gray-700 font-medium mb-2">Prova Objetiva 2</label>
-          <input type="number" id="provaObjetiva2" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
+          <label for="PO2" class="block text-gray-700 font-medium mb-2">Prova Objetiva 2</label>
+          <input type="number" id="PO2" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
         </div>
         <div>
-          <label for="provaObjetiva3" class="block text-gray-700 font-medium mb-2">Prova Objetiva 3</label>
-          <input type="number" id="provaObjetiva3" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
+          <label for="PO3" class="block text-gray-700 font-medium mb-2">Prova Objetiva 3</label>
+          <input type="number" id="PO3" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
         </div>
         <button type="button" id="calcularNota" class="w-full bg-blue-600 text-white py-2 rounded-md shadow hover:bg-blue-700">Calcular Nota</button>
       </form>
     </div>
-    <!-- Tabela -->
+    <!-- tabela -->
     <div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto mt-10">
       <h2 class="text-xl font-bold text-gray-800 mb-4">Planilha de Notas</h2>
       <table class="min-w-full border-collapse border border-gray-300 text-sm text-gray-800">
@@ -54,7 +54,7 @@
           </tr>
         </thead>
         <tbody id="tabelaNotas">
-          <!-- Linhas da tabela serão adicionadas aqui dinamicamente -->
+          <!-- linhas da tabela -->
         </tbody>
       </table>
     </div>

@@ -1,11 +1,11 @@
-body {
-  font-family: Arial, sans-serif;
+body{
+  font-family: 'Poppins', 'Arial', 'sans-serif';
   background-color: #f4f4f9;
   margin: 0;
   padding: 0;
 }
 
-.container {
+.contêiner{
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
@@ -14,12 +14,12 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+h1{
   text-align: center;
   color: #333;
 }
 
-.input-group {
+.input-group{
   margin-bottom: 15px;
 }
 
@@ -29,14 +29,14 @@ label {
   color: #555;
 }
 
-input {
+input{
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-button {
+button{
   width: 100%;
   padding: 10px;
   background: #007BFF;
@@ -47,11 +47,11 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover{
   background: #0056b3;
 }
 
-.resultado {
+.resultado{
   margin-top: 20px;
   font-size: 18px;
   text-align: center;
