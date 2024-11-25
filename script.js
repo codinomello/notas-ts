@@ -1,5 +1,5 @@
 const tabela = document.getElementById('tabela');
-const calcularNota = document.getElementById('calcular');
+const calcular = document.getElementById('calcular');
 
 // função para carregar notas do backend
 async function carregar() {
@@ -18,7 +18,7 @@ async function carregar() {
 }
 
 // atualiza tabela e backend ao calcular nota
-calcularNota.addEventListener('click', async () => {
+calcular.addEventListener('click', async () => {
   const Matéria = document.getElementById('matéria').value.trim();
   const NP = parseFloat(document.getElementById('NP').value) || 0;
   const PD = parseFloat(document.getElementById('PD').value) || 0;

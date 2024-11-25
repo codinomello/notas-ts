@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-// modelo de Notas
+// modelo de notas
 const NotaSchema = new mongoose.Schema({
   materia: { type: String, required: true, unique: true },
   notaFinal: { type: Number, required: true },
