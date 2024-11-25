@@ -3,44 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planilhas de Notas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <title>Planilhas de Notas</title>
 </head>
 <body class="bg-gray-100 font-sans">
-  <div class="container mx-auto px-4 py-10">
+  <div class="contêiner mx-auto px-4 py-10">
     <!-- formulário -->
     <div class="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto">
       <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Planilhas de Notas</h1>
-      <form id="gradeForm" class="space-y-4">
+      <form id="formulário" class="space-y-4">
         <div>
           <label for="matéria" class="block text-gray-700 font-medium mb-2">Matéria</label>
-          <input type="text" id="matéria" placeholder="Ex: Matemática" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+          <input type="text" id="matéria" placeholder="Ex: Matemática" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" required>
         </div>
         <div>
           <label for="NP" class="block text-gray-700 font-medium mb-2">Nota do Professor (20%)</label>
-          <input type="number" id="NP" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
+          <input type="number" id="NP" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
         </div>
         <div>
           <label for="PD" class="block text-gray-700 font-medium mb-2">Prova Dissertativa (25%)</label>
-          <input type="number" id="PD" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
+          <input type="number" id="PD" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
         </div>
         <div>
           <label for="SI" class="block text-gray-700 font-medium mb-2">Simulado (25%)</label>
-          <input type="number" id="SI" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
+          <input type="number" id="SI" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
         </div>
         <div>
           <label for="PO1" class="block text-gray-700 font-medium mb-2">Prova Objetiva 1</label>
-          <input type="number" id="PO1" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
+          <input type="number" id="PO1" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
         </div>
         <div>
           <label for="PO2" class="block text-gray-700 font-medium mb-2">Prova Objetiva 2</label>
-          <input type="number" id="PO2" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.01" min="0" max="10" required>
+          <input type="number" id="PO2" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
         </div>
         <div>
           <label for="PO3" class="block text-gray-700 font-medium mb-2">Prova Objetiva 3</label>
-          <input type="number" id="PO3" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" step="0.1" min="0" max="10" required>
+          <input type="number" id="PO3" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
         </div>
-        <button type="button" id="calcularNota" class="w-full bg-blue-600 text-white py-2 rounded-md shadow hover:bg-blue-700">Calcular Nota</button>
+        <button type="button" id="calcular" class="w-full bg-blue-600 text-white py-2 rounded-md shadow hover:bg-blue-700">Calcular Nota</button>
       </form>
     </div>
     <!-- tabela -->
@@ -53,12 +56,13 @@
             <th class="border border-gray-300 py-2 px-4">Nota Final</th>
           </tr>
         </thead>
-        <tbody id="tabelaNotas">
+        <tbody id="tabela">
           <!-- linhas da tabela -->
         </tbody>
       </table>
     </div>
   </div>
   <script src="script.js"></script>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');</style>
 </body>
 </html>

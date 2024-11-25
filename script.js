@@ -1,8 +1,8 @@
-const tabela = document.getElementById('tabelaNotas');
-const calcularNota = document.getElementById('calcularNota');
+const tabela = document.getElementById('tabela');
+const calcularNota = document.getElementById('calcular');
 
 // função para carregar notas do backend
-async function carregarNotas() {
+async function carregar() {
   const response = await fetch('http://localhost:3000/notas');
   const notas = await response.json();
 
@@ -11,43 +11,43 @@ async function carregarNotas() {
   notas.forEach(nota => {
     const novaLinha = tabela.insertRow();
     novaLinha.innerHTML = `
-      <td class="border border-gray-300 py-2 px-4">${nota.materia}</td>
+      <td class="border border-gray-300 py-2 px-4">${nota.Matéria}</td>
       <td class="border border-gray-300 py-2 px-4">${nota.notaFinal.toFixed(2)}</td>
     `;
   });
 }
 
-// Atualiza tabela e backend ao calcular nota
+// atualiza tabela e backend ao calcular nota
 calcularNota.addEventListener('click', async () => {
-  const materia = document.getElementById('materia').value.trim();
-  const notaProfessor = parseFloat(document.getElementById('notaProfessor').value) || 0;
-  const provaDissertativa = parseFloat(document.getElementById('provaDissertativa').value) || 0;
-  const simulado = parseFloat(document.getElementById('simulado').value) || 0;
-  const provaObjetiva1 = parseFloat(document.getElementById('provaObjetiva1').value) || 0;
-  const provaObjetiva2 = parseFloat(document.getElementById('provaObjetiva2').value) || 0;
-  const provaObjetiva3 = parseFloat(document.getElementById('provaObjetiva3').value) || 0;
+  const Matéria = document.getElementById('matéria').value.trim();
+  const NP = parseFloat(document.getElementById('NP').value) || 0;
+  const PD = parseFloat(document.getElementById('PD').value) || 0;
+  const SI = parseFloat(document.getElementById('SI').value) || 0;
+  const PO1 = parseFloat(document.getElementById('PO1').value) || 0;
+  const PO2 = parseFloat(document.getElementById('PO2').value) || 0;
+  const PO3 = parseFloat(document.getElementById('PO3').value) || 0;
 
-  if (!materia) {
+  if (!Matéria) {
     alert('Por favor, preencha o nome da matéria!');
     return;
   }
 
   const notaFinal = 
-    notaProfessor * 0.2 +
-    provaDissertativa * 0.25 +
-    simulado * 0.25 +
-    ((provaObjetiva1 + provaObjetiva2 + provaObjetiva3) / 3) * 0.3;
+    NP * 0.2 +
+    PD * 0.25 +
+    SI * 0.25 +
+    ((PO1 + PO2 + PO3) / 3) * 0.3;
 
   try {
     // envia nota para o backend
     await fetch('http://localhost:3000/notas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ materia, notaFinal }),
+      body: JSON.stringify({ Matéria, notaFinal }),
     });
 
     // atualiza tabela
-    await carregarNotas();
+    await carregar();
   } catch (err) {
     alert('Erro ao salvar nota no servidor.');
   }
@@ -56,5 +56,14 @@ calcularNota.addEventListener('click', async () => {
   document.getElementById('gradeForm').reset();
 });
 
+fetch('https://eniac.onrender.com/api/rota', {
+  method: 'POST',
+  body: JSON.stringify(dados),
+  headers: { 'Content-Type': 'application/json' },
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Erro:', error));
+
 // carrega notas ao iniciar
-carregarNotas();
+carregar();
