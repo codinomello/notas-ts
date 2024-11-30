@@ -1,69 +1,100 @@
 function calcular() {
-  // Captura os valores dos campos de seleção (regular)
-  const NP = parseFloat(document.getElementById('NP').value) || 0;
-  const PD = parseFloat(document.getElementById('PD').value) || 0;
-  const SI = parseFloat(document.getElementById('SI').value) || 0;
-  const PO1 = parseFloat(document.getElementById('PO1').value) || 0;
-  const PO2 = parseFloat(document.getElementById('PO2').value) || 0;
-  const PO3 = parseFloat(document.getElementById('PO3').value) || 0;
-  
-  // Captura os valores dos campos de seleção (recuperação)
-  const ED = parseFloat(document.getElementById('ED').value) || 0;
-  const PR = parseFloat(document.getElementById('PR').value) || 0;
+  // captura os valores dos campos de entrada
+  const campos = {
+    NP: parseFloat(document.getElementById('NP').value) || 0,
+    PD: parseFloat(document.getElementById('PD').value) || 0,
+    SI: parseFloat(document.getElementById('SI').value) || 0,
+    PO1: parseFloat(document.getElementById('PO1').value) || 0,
+    PO2: parseFloat(document.getElementById('PO2').value) || 0,
+    PO3: parseFloat(document.getElementById('PO3').value) || 0,
+    EX: parseFloat(document.getElementById('EX').value) || 0,
+    DS: parseFloat(document.getElementById('DS').value) || 0,
+    PV: parseFloat(document.getElementById('PV').value) || 0,
+    PE: parseFloat(document.getElementById('PE').value) || 0,
+    ED: parseFloat(document.getElementById('ED').value) || 0,
+    PR: parseFloat(document.getElementById('PR').value) || 0,
+  };
 
-  // Captura o nível educacional
-  const nívelEducacional = document.getElementById('nívelEducacional').value; // Supondo que o nívelEducacional seja capturado de um campo de seleção
-  
-  // Inicializa a variável nota e recuperação
+  const nível = document.getElementById('nível-educacional').value;
+  const matéria = document.getElementById('matéria').value;
+
   let nota = 0;
   let recuperação = 0;
+  let técnico = 0;
 
-  // Faz o cálculo das notas
-  if (nívelEducacional === 'EFI') {
-    nota = NP * 0.20 + PD * 0.25 + SI * 0.25;
-    recuperação = (nota + (ED * 0.30 + PR * 0.70)) / 2;
+  // verifica o nível educacional e calcula a nota e recuperação
+  switch (nível) {
+    case 'EFI':
+      nota = campos.NP * 0.20 + campos.PD * 0.25 + campos.SI * 0.25;
+      recuperação = (nota + (campos.ED * 0.30 + campos.PR * 0.70)) / 2;
+      break;
+    case 'EFII':
+      nota = campos.NP * 0.20 + campos.PD * 0.25 + campos.SI * 0.25 + ((campos.PO1 + campos.PO2) * 0.30 / 2);
+      recuperação = (nota + (campos.ED * 0.30 + campos.PR * 0.70)) / 2;
+      break;
+    case 'EM':
+      nota = campos.NP * 0.20 + campos.PD * 0.25 + campos.SI * 0.25 + ((campos.PO1 + campos.PO2 + campos.PO3) * 0.30 / 3);
+      recuperação = (nota + (campos.ED * 0.30 + campos.PR * 0.70)) / 2;
+      técnico = campos.EX * 0.20 + campos.DS * 0.30 + campos.PV * 0.50;
+      break;
+    default:
+      console.error("Nível educacional inválido!");
+      return; // sai da função em caso de erro
   }
-  else if (nívelEducacional === 'EFII') {
-    nota = NP * 0.20 + PD * 0.25 + SI * 0.25 + ((PO1 + PO2) * 0.30 / 2);
-    recuperação = (nota + (ED * 0.30 + PR * 0.70)) / 2;
-  }
-  else if (nívelEducacional === 'EM') {
-    nota = NP * 0.20 + PD * 0.25 + SI * 0.25 + ((PO1 + PO2 + PO3) * 0.30 / 3);
-    recuperação = (nota + (ED * 0.30 + PR * 0.70)) / 2;
-  }
-  else {
-    console.error("Nível educacional inválido!");
-    return; // sair da função em caso de erro
-  }
-  
-  // Exibe a nota no campo correspondente
+
+  // exibe a nota no campo de resultado
   const resultado = document.getElementById('resultado');
-  resultado.innerHTML = `Sua nota final é: <strong>${nota.toFixed(2)}</strong>`; // Exibe a nota com 2 casas decimais
+  resultado.classList.remove('hidden');
+  let mensagem = `Sua nota final em <b>${matéria}</b> é de <b>${nota.toFixed(1)}</b> pontos.<br>`;
 
-  // Verifica se o aluno foi aprovado ou reprovado
-  if (nota >= 6 && nota <= 10) { 
-    resultado.classList.add('aprovado');
-    resultado.classList.remove('reprovado');
-    resultado.innerHTML += `<br>Parabéns! Você passou.<br>`;
-    resultado.innerHTML += `Com <strong>${nota.toFixed(2)}</strong> pontos.`;
-  } 
-  else if (nota >= 0 && nota < 6) {
-    resultado.classList.add('reprovado');
-    resultado.classList.remove('aprovado');
-    resultado.innerHTML += `<br>Infelizmente, você não passou.<br>`;
-    const pontosFaltando = (6 - nota).toFixed(2);
-    resultado.innerHTML += `Você precisa de mais <strong>${pontosFaltando}</strong> pontos para ser aprovado.`;
+  // determina se o aluno foi aprovado ou reprovado no regular
+  if (nota === 0) {
+    resultado.classList.add('bg-teal-500');
+    resultado.classList.remove('bg-green-600');
+    resultado.classList.remove('bg-yellow-400');
+    resultado.classList.remove('bg-purple-400');
+    mensagem = `Preencha ao menos um campo!`; // mostra a mensagem de campos não preenchidos
+  } else if (nota < 0 || nota > 10) {
+    resultado.classList.add('bg-purple-400');
+    resultado.classList.remove('bg-green-600');
+    resultado.classList.remove('bg-yellow-400');
+    resultado.classList.remove('bg-teal-500');
+    if (nota < 0 || recuperação < 0|| técnico < 0) {
+      mensagem = `A nota ${nota.toFixed(1)} não pode ser abaixo de zero (0) pontos. <br> Preencha os campos com valores reais!`;
+    }
+    else{
+      mensagem = `A nota ${nota.toFixed(1)} não pode ser acima de dez (10) pontos. <br> Preencha os campos com valores reais!`;
+    }
+  } else if (nota >= 6 && nota <= 10) {
+    resultado.classList.add('bg-green-600');
+    resultado.classList.remove('bg-yellow-400');
+    resultado.classList.remove('bg-purple-400');
+    resultado.classList.remove('bg-teal-500');
+    const acima = nota - 6;
+    mensagem += `Parabéns! Você passou. <br>Sua nota está <b>${acima.toFixed(1)}</b> pontos acima da média.`;
+  } else if (nota > 0 && nota < 6 ) {
+    resultado.classList.add('bg-yellow-400');
+    resultado.classList.remove('bg-green-600');
+    resultado.classList.remove('bg-purple-400');
+    resultado.classList.remove('bg-teal-500');
+    const abaixo = 6 - nota;
+    mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+  } else {
+    alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
+    return; 
   }
 
-  // Atualiza a tabela (se necessário)
+  resultado.innerHTML = mensagem;
+
+  // atualiza a tabela (se necessário)
   atualizar();
 }
 
 function mostrar() {
-  const nívelEducacional = document.getElementById('nível').value;
+  const nível = document.getElementById('nível-educacional').value;
 
   // esconde o formulário para o caso de não selecionar um nível
-  if (nívelEducacional === "EFI") {
+  if (nível === "EFI") {
     document.getElementById('formulário').classList.remove('hidden');
     document.getElementById('regular-seção').classList.add('hidden');
     document.getElementById('técnico').classList.add('hidden');
@@ -73,7 +104,7 @@ function mostrar() {
     document.getElementById('prova-objetiva-emii').classList.add('hidden');
     document.getElementById('prova-objetiva-em').classList.add('hidden');
   } 
-  else if (nívelEducacional === "EFII") {
+  else if (nível === "EFII") {
     document.getElementById('formulário').classList.remove('hidden');
     document.getElementById('regular-seção').classList.add('hidden');
     document.getElementById('técnico').classList.add('hidden');
@@ -83,7 +114,7 @@ function mostrar() {
     document.getElementById('prova-objetiva-emii').classList.remove('hidden');
     document.getElementById('prova-objetiva-em').classList.add('hidden');
   } 
-  else if (nívelEducacional === "EM") {
+  else if (nível === "EM") {
     document.getElementById('formulário').classList.remove('hidden');
     document.getElementById('regular-seção').classList.add('hidden');
     document.getElementById('recuperação-seção').classList.add('hidden');
@@ -93,36 +124,26 @@ function mostrar() {
     document.getElementById('prova-objetiva-emii').classList.add('hidden');
     document.getElementById('prova-objetiva-em').classList.remove('hidden');
   }
-  const resultado = document.getElementById('resultado');
-  resultado.innerHTML = `Sua nota final é: <strong>${nota}</strong>`;
-  if (6 <= nota <= 10) { 
-    resultado.classList.add('aprovado');
-    resultado.classList.remove('reprovado'); resultado.innerHTML += `<br>Parabéns! Você passou.<br>`;
-    resultado.innerHTML += `Com <strong>${nota}</strong> pontos.`; }
-  else if (0 <= nota <= 6) {
-    resultado.classList.add('reprovado');
-    resultado.classList.remove('aprovado'); resultado.innerHTML += `<br>Infelizmente, você não passou.<br>`;
-    resultado.innerHTML += `É necessário de mais <strong>${nota}</strong> pontos para ser aprovado.`; }
 }
 
 function menu(display) {
   switch (display) {
     case 1:
-      // exibindo as opções para o ensino regular
+      // exibe as opções para o ensino regular
       document.getElementById('regular-seção').classList.remove('hidden');
       document.getElementById('técnico-seção').classList.add('hidden');
       document.getElementById('recuperação-seção').classList.add('hidden');
       document.getElementById('ações').classList.remove('hidden');
       break;    
     case 2:
-      // exibindo as opções para a recuperação
+      // exibe as opções para o ensino técnico
       document.getElementById('regular-seção').classList.add('hidden');
       document.getElementById('técnico-seção').classList.remove('hidden');
       document.getElementById('recuperação-seção').classList.add('hidden');
       document.getElementById('ações').classList.remove('hidden');
       break;
     case 3:
-      // exibindo as opções para o ensino técnico
+      // exibe as opções para a recuperação
       document.getElementById('regular-seção').classList.add('hidden');
       document.getElementById('técnico-seção').classList.add('hidden');
       document.getElementById('recuperação-seção').classList.remove('hidden');
@@ -144,8 +165,18 @@ function remover() {
     }
   });
 
+  const matérias = ['matéria', 'disciplina', 'áreas'];
+
+  // limpa campos de disciplinas
+  matérias.forEach((id) => {
+    const matéria = document.getElementById(id);
+    if (matéria) {
+      matéria.value = ''; // limpa o valor
+    }
+  });
+
   // limpa o campo <select>
-  const select = document.getElementById('PO1');
+  const select = {PO1: document.getElementById('PO1'), PO2: document.getElementById('PO2'), PO3: document.getElementById('PO3')};
   if (select) {
     select.value = null; // define o valor padrão
   }
@@ -153,8 +184,7 @@ function remover() {
   // limpa o conteúdo e as classes do elemento 'resultado'
   const resultado = document.getElementById('resultado');
   if (resultado) {
-    resultado.innerHTML = '...'; // define o conteúdo padrão
-    resultado.classList.remove('aprovado', 'reprovado'); // remove classes
+    resultado.classList.add('hidden'); // define o conteúdo padrão
   }
 }
 

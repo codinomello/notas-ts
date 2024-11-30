@@ -6,6 +6,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="icon" type="image.png" href="icon/calculadora.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Planilhas de Notas</title>
 </head>
@@ -13,9 +15,9 @@
   <div class="contêiner mx-auto px-4 py-10">
     <!-- formulário -->
     <div class="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
-      <h1 class="font-bold text-xl text-gray-800 text-center mb-4">Calculadora de Notas</h1><hr>
-      <label for="nível" class="block text-l font-bold text-center text-gray-800 mt-4">Nível Educacional</label>
-      <select id="nível" name="nível-educacional" onchange="mostrar(); remover();" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2 mt-4 mb-2" required>
+      <h1 class="font-bold text-xl text-gray-800 text-center mb-4">Calculadora de Notas </h1><hr>
+      <label for="nível-educacional" class="block text-lg font-semibold text-center text-gray-800 mt-4">Nível de Educação</label>
+      <select id="nível-educacional" name="nível" onchange="mostrar(); remover();" class="w-full bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2 mt-4" required>
         <option value="" disabled selected></option>
         <option value="EFI">Ensino Fundamental I</option>
         <option value="EFII">Ensino Fundamental II</option>
@@ -23,16 +25,16 @@
       </select>
       <form id="formulário" class="space-y-2 hidden">
         <div class="flex space-x-4 mb-4 mt-4">
-          <button type="button" id="regular" onclick="menu(1); remover();" class="w-full bg-blue-700 text-white py-2 rounded-md shadow hover:bg-blue-700 transition-colors duration-500 ease-in-out hover:bg-blue-800">Regular</button>
-          <button type="button" id="técnico" onclick="menu(2); remover();" class="w-full bg-blue-700 text-white py-2 rounded-md shadow hover:bg-blue-700 transition-colors duration-500 ease-in-out hover:bg-blue-800">Técnico</button>
-          <button type="button" id="recuperação" onclick="menu(3); remover();" class="w-full bg-blue-700 text-white py-2 rounded-md shadow hover:bg-blue-700 transition-colors duration-500 ease-in-out hover:bg-blue-800">Recuperação</button>
+          <button type="button" id="regular" onclick="menu(1); remover();" class="w-full font-semibold bg-blue-700 text-white py-2 rounded-md shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Regular</button>
+          <button type="button" id="técnico" onclick="menu(2); remover();" class="w-full font-semibold bg-blue-700 text-white py-2 rounded-md shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Técnico</button>
+          <button type="button" id="recuperação" onclick="menu(3); remover();" class="w-full font-semibold bg-blue-700 text-white py-2 rounded-md shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Recuperação</button>
         </div>
         <hr class="mt-2 mb-2">
         <!-- regular -->
         <section id="regular-seção">
           <div>
             <label for="matéria" class="block text-l font-bold text-gray-800 mb-2">Disciplina</label>
-            <input type="text" id="matéria" name="matéria" list="matérias" placeholder="Exemplo: Álgebra" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
+            <input type="text" id="matéria" name="matéria" list="matérias" placeholder="Exemplo: Álgebra" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
             <datalist id="matérias">
               <option value="Álgebra">
               <option value="Artes">
@@ -56,19 +58,19 @@
             <h2 id="avaliações" class="text-l font-bold text-gray-800 mb-2">Avaliações</h2>
           <div>
             <label for="NP" class="block text-gray-700 font-medium mb-2">Nota do Professor (20%)</label>
-            <input type="number" id="NP" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            <input type="number" id="NP" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
             <label for="PD" class="block text-gray-700 font-medium mb-2">Prova Dissertativa (25%)</label>
-            <input type="number" id="PD" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            <input type="number" id="PD" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
             <label for="SI" class="block text-gray-700 font-medium mb-2">Simulado (25%)</label>
-            <input type="number" id="SI" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            <input type="number" id="SI" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div id="prova-objetiva-em">
             <label for="PO1" class="block text-gray-700 font-medium mb-2">Prova Objetiva 1 (10%)</label>
-            <select id="PO1" name="nota" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
+            <select id="PO1" name="nota" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
               <option value="" disabled selected></option>
               <option value="0">0</option>
               <option value="2.5">2.5</option>
@@ -77,7 +79,7 @@
               <option value="10">10</option>
             </select>
             <label for="PO2" class="block text-gray-700 font-medium mb-2">Prova Objetiva 2 (10%)</label>
-            <select id="PO2" name="nota" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
+            <select id="PO2" name="nota" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
               <option value="" disabled selected></option>
               <option value="0">0</option>
               <option value="2.5">2.5</option>
@@ -86,7 +88,7 @@
               <option value="10">10</option>
             </select>
             <label for="PO3" class="block text-gray-700 font-medium mb-2">Prova Objetiva 3 (10%)</label>
-            <select id="PO3" name="nota" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1" required>
+            <select id="PO3" name="nota" class="w-full bg-inherit bg- border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" required>
               <option value="" disabled selected></option>
               <option value="0">0</option>
               <option value="2.5">2.5</option>
@@ -97,7 +99,7 @@
           </div>
           <div id="prova-objetiva-emii">
             <label for="PO1" class="block text-gray-700 font-medium mb-2">Prova Objetiva 1 (15%)</label>
-            <select id="PO1" name="nota" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
+            <select id="PO1" name="nota" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
               <option value="" disabled selected></option>
               <option value="0">0</option>
               <option value="2.5">2.5</option>
@@ -106,7 +108,7 @@
               <option value="10">10</option>
             </select>
             <label for="PO2" class="block text-gray-700 font-medium mb-2">Prova Objetiva 2 (15%)</label>
-            <select id="PO2" name="nota" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1" required>
+            <select id="PO2" name="nota" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" required>
               <option value="" disabled selected></option>
               <option value="0">0</option>
               <option value="2.5">2.5</option>
@@ -120,7 +122,7 @@
         <section id="técnico-seção">
           <div>
             <label for="disciplina" class="block text-l font-bold text-gray-800 mb-2">Disciplina</label>
-            <input type="text" id="disciplina" name="disciplina" list="disciplinas" placeholder="Exemplo: Programação" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
+            <input type="text" id="disciplina" name="disciplina" list="disciplinas" placeholder="Exemplo: Programação" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
             <datalist id="disciplinas">
               <option value="Linguagem C">
               <option value="Linguagem Python">
@@ -129,26 +131,26 @@
           </div>
           <div>
             <label for="EX" class="block text-gray-700 font-medium mb-2">Exercícios (20%)</label>
-            <input type="number" id="EX" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            <input type="number" id="EX" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
             <label for="DS" class="block text-gray-700 font-medium mb-2">Desafios (30%)</label>
-            <input type="number" id="EX" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            <input type="number" id="DS" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
             <label for="PV" class="block text-gray-700 font-medium mb-2">Prova do Técnico (50%)</label>
-            <input type="number" id="PR" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="1" min="0" max="10" required>
+            <input type="number" id="PV" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="1" min="0" max="10" required>
           </div>
           <div>
-            <label for="PE" id="PE" class="text-l font-bold text-gray-800 mb-2">Projeto de Empreendedorismo</label>
-            <input type="number" id="PE" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            <label for="PE" class="text-base font-bold text-gray-800 mb-2">Projeto de Empreendedorismo</label>
+            <input type="number" id="PE" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mt-2" step="0.1" min="0" max="10" required>
           </div>
         </section>
         <!-- recuperação -->
         <section id="recuperação-seção">
           <div>
             <label for="áreas" class="block text-l font-bold text-gray-800 mb-2">Disciplina</label>
-            <input type="text" id="áreas" name="áreas" list="áreas" placeholder="Exemplo: Gramática" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
+            <input type="text" id="áreas" name="áreas" list="áreas" placeholder="Exemplo: Gramática" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
             <datalist id="áreas">
               <option value="Álgebra">
               <option value="Artes">
@@ -170,33 +172,34 @@
             </datalist>
           </div>
           <div>
+            <label for="MP" class="block text-gray-700 font-medium mb-2">Média Pré-recuperação</label>
+            <input type="number" id="MP" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+          </div>
+          <div>
             <label for="ED" class="block text-gray-700 font-medium mb-2">Estudo Dirigido (30%)</label>
-            <input type="number" id="ED" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2 mb-2" step="0.1" min="0" max="10" required>
+            <input type="number" id="ED" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
             <label for="PR" class="block text-gray-700 font-medium mb-2">Prova de Recuperação (70%)</label>
-            <input type="number" id="PR" class="w-full border-gray-300 rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
+            <input type="number" id="PR" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
           </div>
         </section>
         <div id="ações" class="grid gap-2">
           <hr class="mt-2 mb-2">
-          <button type="button" onclick="remover()" id="limpar" class="w-full bg-red-600 text-white py-2 rounded-lg shadow transition-colors duration-500 ease-in-out hover:bg-red-700">Remover</button>
-          <button type="button" onclick="calcular()" id="calcular" class="w-full bg-blue-700 text-white py-2 rounded-lg shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Calcular</button>
+          <button type="button" onclick="remover()" id="limpar" class="font-medium w-full bg-red-600 text-white py-2 rounded-lg shadow transition-colors duration-500 ease-in-out hover:bg-red-700">Remover</button>
+          <button type="button" onclick="calcular()" id="calcular" class="font-medium w-full bg-blue-700 text-white py-2 rounded-lg shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Calcular</button>
         </div>
-        <div id="" class="text-md text-center text-gray-900 font-bold">
-          <p id="resultado"></p>
-          <p> </p>
-        </div>
+        <div id="resultado" class="font-medium w-full text-white text-md text-center py-2 rounded-lg shadow transition-colors duration-500 ease-in-out hidden"></div>
       </form>
     </div>
     <!-- tabela -->
     <div class="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto mt-10">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">Planilha de Notas</h2>
+      <h1 class="text-xl font-bold text-gray-800 mb-4">Planilha de Notas 📋</h1>
       <table class="min-w-full border-collapse border border-gray-300 text-sm text-gray-800">
         <thead>
           <tr class="bg-blue-700 text-white">
-            <th class="border border-gray-300 font-large py-2 px-4">Matéria</th>
-            <th class="border border-gray-300 font-large py-2 px-4">Nota Final</th>
+            <th class="border border-gray-300 font-semibold text-base py-2 px-4">Matéria</th>
+            <th class="border border-gray-300 font-semibold text-base py-2 px-4">Nota Final</th>
           </tr>
         </thead>
         <tbody id="tabela">
@@ -206,7 +209,7 @@
     </div>
     <footer class="bottom-4 w-full text-center">
       <div class="bg-white rounded-lg shadow-md p-2 max-w-2xl mx-auto mt-10">
-        <p class="text-md text-gray-900">Programado por <span class="font-semibold text-blue-600">Gabriel Mello</span></p>
+        <p class="text-base text-gray-900">Programado por <span class="font-semibold text-blue-600"><a href="https://github.com/codinomello" target="_blank">Gabriel Mello</a></span></p>
       </div>
     </footer>
   </div>
