@@ -80,7 +80,7 @@ function calcular() {
       resultado.classList.remove('bg-purple-400');
       resultado.classList.remove('bg-teal-500');
       const abaixo = 6 - nota;
-      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+      mensagem += `Que pena! Você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
     } else {
       alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
       return; 
@@ -120,7 +120,7 @@ function calcular() {
       resultado.classList.remove('bg-purple-400');
       resultado.classList.remove('bg-teal-500');
       const abaixo = 6 - técnico;
-      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+      mensagem += `Que pena! Você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
     } else {
       alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
       return; 
@@ -160,7 +160,7 @@ function calcular() {
       resultado.classList.remove('bg-purple-400');
       resultado.classList.remove('bg-teal-500');
       const abaixo = 6 - recuperação;
-      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+      mensagem += `Que pena! Você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
     } else {
       alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
       return; 
