@@ -125,36 +125,6 @@ function calcular() {
       alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
       return; 
     }
-    // faz o cálculo da nota do projeto
-    if (projeto < 0 || projeto > 10) {
-      resultado.classList.add('bg-purple-400');
-      resultado.classList.remove('bg-green-600');
-      resultado.classList.remove('bg-yellow-400');
-      resultado.classList.remove('bg-teal-500');
-      if (projeto < 0) {
-        mensagem = `A nota ${projeto.toFixed(1)} não pode ser abaixo de zero (0) pontos. <br> Preencha os campos com valores reais!`;
-      }
-      else{
-        mensagem = `A nota ${projeto.toFixed(1)} não pode ser acima de dez (10) pontos. <br> Preencha os campos com valores reais!`;
-      }
-    } else if (projeto >= 6 && projeto <= 10) {
-      resultado.classList.add('bg-green-600');
-      resultado.classList.remove('bg-yellow-400');
-      resultado.classList.remove('bg-purple-400');
-      resultado.classList.remove('bg-teal-500');
-      const acima = projeto - 6;
-      mensagem += `Parabéns! Você passou. <br>Sua nota está <b>${acima.toFixed(1)}</b> pontos acima da média.`;
-    } else if (projeto > 0 && projeto < 6) {
-      resultado.classList.add('bg-yellow-400');
-      resultado.classList.remove('bg-green-600');
-      resultado.classList.remove('bg-purple-400');
-      resultado.classList.remove('bg-teal-500');
-      const abaixo = 6 - projeto;
-      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
-    } else {
-      alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
-      return; 
-    }
   }
 
   // determina se o aluno foi aprovado ou reprovado na recuperação
