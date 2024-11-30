@@ -11,6 +11,7 @@ function calcular() {
     DS: parseFloat(document.getElementById('DS').value) || 0,
     PV: parseFloat(document.getElementById('PV').value) || 0,
     PE: parseFloat(document.getElementById('PE').value) || 0,
+    MP: parseFloat(document.getElementById('MP').value) || 0,
     ED: parseFloat(document.getElementById('ED').value) || 0,
     PR: parseFloat(document.getElementById('PR').value) || 0,
   };
@@ -34,7 +35,7 @@ function calcular() {
       break;
     case 'EM':
       nota = campos.NP * 0.20 + campos.PD * 0.25 + campos.SI * 0.25 + ((campos.PO1 + campos.PO2 + campos.PO3) * 0.30 / 3);
-      recuperação = (nota + (campos.ED * 0.30 + campos.PR * 0.70)) / 2;
+      recuperação = (campos.MP + (campos.ED * 0.30 + campos.PR * 0.70)) / 2;
       técnico = campos.EX * 0.20 + campos.DS * 0.30 + campos.PV * 0.50;
       projeto = campos.PE;
       break;
