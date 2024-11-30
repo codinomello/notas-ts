@@ -17,10 +17,10 @@ function calcular() {
 
   const nível = document.getElementById('nível-educacional').value;
   const matéria = document.getElementById('matéria').value;
+  const disciplina = document.getElementById('disciplina').value;
+  const área = document.getElementById('áreas').value;
 
-  let nota = 0;
-  let recuperação = 0;
-  let técnico = 0;
+  let nota, recuperação, técnico, projeto = 0;
 
   // verifica o nível educacional e calcula a nota e recuperação
   switch (nível) {
@@ -36,6 +36,7 @@ function calcular() {
       nota = campos.NP * 0.20 + campos.PD * 0.25 + campos.SI * 0.25 + ((campos.PO1 + campos.PO2 + campos.PO3) * 0.30 / 3);
       recuperação = (nota + (campos.ED * 0.30 + campos.PR * 0.70)) / 2;
       técnico = campos.EX * 0.20 + campos.DS * 0.30 + campos.PV * 0.50;
+      projeto = campos.PE;
       break;
     default:
       console.error("Nível educacional inválido!");
@@ -45,43 +46,155 @@ function calcular() {
   // exibe a nota no campo de resultado
   const resultado = document.getElementById('resultado');
   resultado.classList.remove('hidden');
-  let mensagem = `Sua nota final em <b>${matéria}</b> é de <b>${nota.toFixed(1)}</b> pontos.<br>`;
+  let mensagem = `Sua nota final em <b>${matéria || "Matéria"}</b> é de <b>${nota.toFixed(1)}</b> pontos.<br>`;
 
   // determina se o aluno foi aprovado ou reprovado no regular
-  if (nota === 0) {
-    resultado.classList.add('bg-teal-500');
-    resultado.classList.remove('bg-green-600');
-    resultado.classList.remove('bg-yellow-400');
-    resultado.classList.remove('bg-purple-400');
-    mensagem = `Preencha ao menos um campo!`; // mostra a mensagem de campos não preenchidos
-  } else if (nota < 0 || nota > 10) {
-    resultado.classList.add('bg-purple-400');
-    resultado.classList.remove('bg-green-600');
-    resultado.classList.remove('bg-yellow-400');
-    resultado.classList.remove('bg-teal-500');
-    if (nota < 0 || recuperação < 0|| técnico < 0) {
-      mensagem = `A nota ${nota.toFixed(1)} não pode ser abaixo de zero (0) pontos. <br> Preencha os campos com valores reais!`;
+  if (document.getElementById('regular').classList.contains('selecionado')) {
+    if (nota === 0) {
+      resultado.classList.add('bg-teal-500');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-purple-400');
+      mensagem = `Preencha ao menos um campo!`; // mostra a mensagem de campos não preenchidos
+    } else if (nota < 0 || nota > 10) {
+      resultado.classList.add('bg-purple-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-teal-500');
+      if (nota < 0) {
+        mensagem = `A nota ${nota.toFixed(1)} não pode ser abaixo de zero (0) pontos. <br> Preencha os campos com valores reais!`;
+      }
+      else{
+        mensagem = `A nota ${nota.toFixed(1)} não pode ser acima de dez (10) pontos. <br> Preencha os campos com valores reais!`;
+      }
+    } else if (nota >= 6 && nota <= 10) {
+      resultado.classList.add('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const acima = nota - 6;
+      mensagem += `Parabéns! Você passou. <br>Sua nota está <b>${acima.toFixed(1)}</b> pontos acima da média.`;
+    } else if (nota > 0 && nota < 6) {
+      resultado.classList.add('bg-yellow-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const abaixo = 6 - nota;
+      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+    } else {
+      alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
+      return; 
     }
-    else{
-      mensagem = `A nota ${nota.toFixed(1)} não pode ser acima de dez (10) pontos. <br> Preencha os campos com valores reais!`;
+  }
+
+  // determina se o aluno foi aprovado ou reprovado no técnico
+  if (document.getElementById('técnico').classList.contains('selecionado')) {
+    mensagem = `Sua nota final em <b>${disciplina || "Matéria"}</b> é de <b>${técnico.toFixed(1)}</b> pontos.<br>`;
+    if (técnico === 0) {
+      resultado.classList.add('bg-teal-500');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-purple-400');
+      mensagem = `Preencha ao menos um campo!`; // mostra a mensagem de campos não preenchidos
+    } else if (técnico < 0 || técnico > 10) {
+      resultado.classList.add('bg-purple-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-teal-500');
+      if (técnico < 0) {
+        mensagem = `A nota ${técnico.toFixed(1)} não pode ser abaixo de zero (0) pontos. <br> Preencha os campos com valores reais!`;
+      }
+      else{
+        mensagem = `A nota ${técnico.toFixed(1)} não pode ser acima de dez (10) pontos. <br> Preencha os campos com valores reais!`;
+      }
+    } else if (técnico >= 6 && técnico <= 10) {
+      resultado.classList.add('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const acima = técnico - 6;
+      mensagem += `Parabéns! Você passou. <br>Sua nota está <b>${acima.toFixed(1)}</b> pontos acima da média.`;
+    } else if (técnico > 0 && técnico < 6) {
+      resultado.classList.add('bg-yellow-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const abaixo = 6 - técnico;
+      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+    } else {
+      alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
+      return; 
     }
-  } else if (nota >= 6 && nota <= 10) {
-    resultado.classList.add('bg-green-600');
-    resultado.classList.remove('bg-yellow-400');
-    resultado.classList.remove('bg-purple-400');
-    resultado.classList.remove('bg-teal-500');
-    const acima = nota - 6;
-    mensagem += `Parabéns! Você passou. <br>Sua nota está <b>${acima.toFixed(1)}</b> pontos acima da média.`;
-  } else if (nota > 0 && nota < 6 ) {
-    resultado.classList.add('bg-yellow-400');
-    resultado.classList.remove('bg-green-600');
-    resultado.classList.remove('bg-purple-400');
-    resultado.classList.remove('bg-teal-500');
-    const abaixo = 6 - nota;
-    mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
-  } else {
-    alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
-    return; 
+    // faz o cálculo da nota do projeto
+    if (projeto < 0 || projeto > 10) {
+      resultado.classList.add('bg-purple-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-teal-500');
+      if (projeto < 0) {
+        mensagem = `A nota ${projeto.toFixed(1)} não pode ser abaixo de zero (0) pontos. <br> Preencha os campos com valores reais!`;
+      }
+      else{
+        mensagem = `A nota ${projeto.toFixed(1)} não pode ser acima de dez (10) pontos. <br> Preencha os campos com valores reais!`;
+      }
+    } else if (projeto >= 6 && projeto <= 10) {
+      resultado.classList.add('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const acima = projeto - 6;
+      mensagem += `Parabéns! Você passou. <br>Sua nota está <b>${acima.toFixed(1)}</b> pontos acima da média.`;
+    } else if (projeto > 0 && projeto < 6) {
+      resultado.classList.add('bg-yellow-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const abaixo = 6 - projeto;
+      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+    } else {
+      alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
+      return; 
+    }
+  }
+
+  // determina se o aluno foi aprovado ou reprovado na recuperação
+  if (document.getElementById('recuperação').classList.contains('selecionado')) {
+    mensagem = `Sua nota final em <b>${área || "Matéria"}</b> é de <b>${recuperação.toFixed(1)}</b> pontos.<br>`;
+    if (recuperação === 0) {
+      resultado.classList.add('bg-teal-500');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-purple-400');
+      mensagem = `Preencha ao menos um campo!`; // mostra a mensagem de campos não preenchidos
+    } else if (recuperação < 0 || recuperação > 10) {
+      resultado.classList.add('bg-purple-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-teal-500');
+      if (recuperação < 0) {
+        mensagem = `A nota ${recuperação.toFixed(1)} não pode ser abaixo de zero (0) pontos. <br> Preencha os campos com valores reais!`;
+      }
+      else{
+        mensagem = `A nota ${recuperação.toFixed(1)} não pode ser acima de dez (10) pontos. <br> Preencha os campos com valores reais!`;
+      }
+    } else if (recuperação >= 6 && recuperação <= 10) {
+      resultado.classList.add('bg-green-600');
+      resultado.classList.remove('bg-yellow-400');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const acima = recuperação - 6;
+      mensagem += `Parabéns! Você passou. <br>Sua nota está <b>${acima.toFixed(1)}</b> pontos acima da média.`;
+    } else if (recuperação > 0 && recuperação < 6) {
+      resultado.classList.add('bg-yellow-400');
+      resultado.classList.remove('bg-green-600');
+      resultado.classList.remove('bg-purple-400');
+      resultado.classList.remove('bg-teal-500');
+      const abaixo = 6 - recuperação;
+      mensagem += `Que infortúnio! você não passou. <br>Sua nota está <b>${abaixo.toFixed(1)}</b> pontos abaixo da média.`;
+    } else {
+      alert("A nota final não pôde ser calculada."); // induz que a nota é um número inválido
+      return; 
+    }
   }
 
   resultado.innerHTML = mensagem;
@@ -130,6 +243,9 @@ function menu(display) {
   switch (display) {
     case 1:
       // exibe as opções para o ensino regular
+      document.getElementById('regular').classList.add('selecionado');
+      document.getElementById('técnico').classList.remove('selecionado');
+      document.getElementById('recuperação').classList.remove('selecionado');
       document.getElementById('regular-seção').classList.remove('hidden');
       document.getElementById('técnico-seção').classList.add('hidden');
       document.getElementById('recuperação-seção').classList.add('hidden');
@@ -137,6 +253,9 @@ function menu(display) {
       break;    
     case 2:
       // exibe as opções para o ensino técnico
+      document.getElementById('técnico').classList.add('selecionado');
+      document.getElementById('regular').classList.remove('selecionado');
+      document.getElementById('recuperação').classList.remove('selecionado');
       document.getElementById('regular-seção').classList.add('hidden');
       document.getElementById('técnico-seção').classList.remove('hidden');
       document.getElementById('recuperação-seção').classList.add('hidden');
@@ -144,6 +263,9 @@ function menu(display) {
       break;
     case 3:
       // exibe as opções para a recuperação
+      document.getElementById('recuperação').classList.add('selecionado');
+      document.getElementById('regular').classList.remove('selecionado');
+      document.getElementById('técnico').classList.remove('selecionado');
       document.getElementById('regular-seção').classList.add('hidden');
       document.getElementById('técnico-seção').classList.add('hidden');
       document.getElementById('recuperação-seção').classList.remove('hidden');
