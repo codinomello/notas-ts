@@ -1,5 +1,5 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require('express');   // expressJS
+const mongoose = require('mongoose'); // mongoDB
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
