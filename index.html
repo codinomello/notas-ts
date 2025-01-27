@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,11 +24,12 @@
         <option value="EM">Ensino Médio</option>
       </select>
       <form id="formulário" class="space-y-2 hidden">
-        <div class="flex space-x-4 mb-4 mt-4">
+        <div class="flex space-x-4 mb-2 mt-4">
           <button type="button" id="regular" onclick="menu(1); remover();" class="w-full font-semibold bg-blue-700 text-white py-2 rounded-md shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Regular</button>
           <button type="button" id="técnico" onclick="menu(2); remover();" class="w-full font-semibold bg-blue-700 text-white py-2 rounded-md shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Técnico</button>
           <button type="button" id="recuperação" onclick="menu(3); remover();" class="w-full font-semibold bg-blue-700 text-white py-2 rounded-md shadow transition-colors duration-500 ease-in-out hover:bg-blue-800">Recuperação</button>
         </div>
+        <button type="button" id="projeto" onclick="menu(4); remover();" class="w-full font-semibold bg-red-700 text-white py-2 rounded-md shadow transition-colors duration-500 ease-in-out hover:bg-red-800 hidden">Projeto de Empreendedorismo</button>
         <hr class="mt-2 mb-2">
         <!-- regular -->
         <section id="regular-seção">
@@ -57,15 +58,15 @@
           </div>
             <h2 id="avaliações" class="text-l font-bold text-gray-800 mb-2">Avaliações</h2>
           <div>
-            <label for="NP" class="block text-gray-700 font-medium mb-2">Nota do Professor (20%)</label>
+              <label for="PD" class="block text-gray-700 font-medium mb-2">Prova Dissertativa (40%)</label>
+              <input type="number" id="PD" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            </div>
+          <div>
+            <label for="NP" class="block text-gray-700 font-medium mb-2">Nota do Professor (30%)</label>
             <input type="number" id="NP" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
-            <label for="PD" class="block text-gray-700 font-medium mb-2">Prova Dissertativa (25%)</label>
-            <input type="number" id="PD" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
-          </div>
-          <div>
-            <label for="SI" class="block text-gray-700 font-medium mb-2">Simulado (25%)</label>
+            <label for="SI" class="block text-gray-700 font-medium mb-2">Simulado (10%)</label>
             <input type="number" id="SI" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div id="prova-objetiva">
@@ -87,15 +88,6 @@
               <option value="7.5">7.5</option>
               <option value="10">10</option>
             </select>
-            <label id="PO3-label" for="PO3" class="block text-gray-700 font-medium mb-2">Prova Objetiva 3 (10%)</label>
-            <select id="PO3" name="nota" class="w-full bg-inherit bg- border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" required>
-              <option value="" disabled selected></option>
-              <option value="0">0</option>
-              <option value="2.5">2.5</option>
-              <option value="5">5</option>
-              <option value="7.5">7.5</option>
-              <option value="10">10</option>
-            </select>
           </div>
         </section>
         <!-- técnico -->
@@ -110,20 +102,16 @@
             </datalist>
           </div>
           <div>
-            <label for="EX" class="block text-gray-700 font-medium mb-2">Exercícios (20%)</label>
-            <input type="number" id="EX" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
+            <label for="PV" class="block text-gray-700 font-medium mb-2">Prova do Técnico (50%)</label>
+            <input type="number" id="PV" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="1" min="0" max="10" required>
           </div>
           <div>
             <label for="DS" class="block text-gray-700 font-medium mb-2">Desafios (30%)</label>
             <input type="number" id="DS" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
-            <label for="PV" class="block text-gray-700 font-medium mb-2">Prova do Técnico (50%)</label>
-            <input type="number" id="PV" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="1" min="0" max="10" required>
-          </div>
-          <div>
-            <label for="PE" class="text-base font-bold text-gray-800 mb-2">Projeto de Empreendedorismo</label>
-            <input type="number" id="PE" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mt-2" step="0.1" min="0" max="10" required>
+            <label for="EX" class="block text-gray-700 font-medium mb-2">Exercícios (20%)</label>
+            <input type="number" id="EX" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
         </section>
         <!-- recuperação -->
@@ -156,12 +144,27 @@
             <input type="number" id="MP" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
           <div>
+            <label for="PR" class="block text-gray-700 font-medium mb-2">Prova de Recuperação (70%)</label>
+            <input type="number" id="PR" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
+          </div>
+          <div>
             <label for="ED" class="block text-gray-700 font-medium mb-2">Estudo Dirigido (30%)</label>
             <input type="number" id="ED" class="w-full bg-inherit bg-white border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" step="0.1" min="0" max="10" required>
           </div>
+        </section>
+        <section id="projeto-seção">
           <div>
-            <label for="PR" class="block text-gray-700 font-medium mb-2">Prova de Recuperação (70%)</label>
-            <input type="number" id="PR" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1" step="0.1" min="0" max="10" required>
+            <label for="PE" class="text-base font-bold text-gray-800 mb-2">Projeto de Empreendedorismo</label>
+            <input type="number" id="PE" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mt-2" step="0.1" min="0" max="10" required>
+            <div>
+              <label for="disciplina" class="block text-l font-bold text-gray-800 mb-2">Disciplina</label>
+              <input type="text" id="disciplina" name="disciplina" list="disciplinas" placeholder="Exemplo: Programação" class="w-full bg-inherit border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 py-1 px-1 mb-2" required>
+              <datalist id="disciplinas">
+                <option value="Linguagem C">
+                <option value="Linguagem Python">
+                <option value="Banco de Dados SQL">
+              </datalist>
+            </div>
           </div>
         </section>
         <div id="ações" class="grid gap-2">
@@ -189,8 +192,9 @@
     </div>
     <footer class="bottom-4 w-full text-center">
       <div class="bg-white rounded-lg shadow-md p-2 max-w-2xl mx-auto mt-10">
-        <p class="text-base text-gray-900">Programado por <span class="font-semibold text-blue-600"><a href="https://github.com/codinomello" target="_blank">Gabriel Mello</a></span></p>
+        <p class="text-base text-gray-900">Desenvolvido por <span class="font-semibold text-blue-600"><a href="https://github.com/codinomello" target="_blank">Gabriel Mello</a></span></p>
       </div>
+      
     </footer>
   </div>
   <script src="script.js"></script>
